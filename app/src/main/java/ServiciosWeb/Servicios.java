@@ -111,6 +111,14 @@ public interface Servicios {
             @Path("codigo_res") String codigo
     );
 
+    @FormUrlEncoded
+    @POST("index.php/paises/editarPaises/{id_bd}")
+    Call<Object> editarPaises(
+            @Field("nombre_bd") String nombre,
+            @Field("continente_bd") String continente,
+            @Path("id_bd") String codigo
+    );
+
     @GET("index.php/reservas/aliminarReservas/{codigo_res}")
     Call<Object> eliminarReserva(
             @Path("codigo_res") String codigo
@@ -128,5 +136,10 @@ public interface Servicios {
     @GET("index.php/servicios/eliminarServicios/{codigo_ser}")
     Call<Object> eliminarServicio(
             @Path("codigo_ser") String codigo
+    );
+
+    @GET("index.php/paises/eliminarPaises/{id_bd}")
+    Call<Object> eliminarPaises(
+            @Path("id_bd") String codigo
     );
 }

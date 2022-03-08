@@ -60,7 +60,7 @@ public class PaisesActivity extends AppCompatActivity {
                 //finish();// Cerrando ventana actual
                 //Objeto para manipular la actividad Menu
                 finish();
-                Intent ventanaEditarPais = new Intent(getApplicationContext(), FormularioPaisActivity.class);
+                Intent ventanaEditarPais = new Intent(getApplicationContext(), FormularioEditarPaisActivity.class);
                 listaSplit = listaPaises.get(position).split("\\|");
                 ventanaEditarPais.putExtra("codigo", listaSplit[0].replace(" ", ""));
                 ventanaEditarPais.putExtra("nombre", listaSplit[1].replace(" ", ""));
