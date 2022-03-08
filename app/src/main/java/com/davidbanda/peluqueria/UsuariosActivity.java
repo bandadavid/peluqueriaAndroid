@@ -53,7 +53,6 @@ public class UsuariosActivity extends AppCompatActivity {
     }
 
     public void seleccionUsuarioClick(){
-
         lstUsuarios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -71,10 +70,6 @@ public class UsuariosActivity extends AppCompatActivity {
                 //Toast.makeText(getApplicationContext(), "Seleccionaste el elemento: " + listaSplit[0].replace(" ", ""), Toast.LENGTH_SHORT).show();
             }
         });
-
-
-
-
     }
 
     public void consultarUsuarios(View view){

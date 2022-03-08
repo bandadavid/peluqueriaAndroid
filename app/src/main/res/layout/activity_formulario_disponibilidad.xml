@@ -105,7 +105,6 @@
                 android:layout_height="34dp"
                 android:background="@drawable/round_btn"
                 android:ems="10"
-                android:enabled="false"
                 android:hint="   hh:mm"
                 android:inputType="textPersonName"
                 android:textColor="#000000"
@@ -146,7 +145,6 @@
                 android:layout_height="35dp"
                 android:background="@drawable/round_btn"
                 android:ems="10"
-                android:enabled="false"
                 android:hint="   hh:mm"
                 android:inputType="textPersonName"
                 android:textColor="#000000"
@@ -170,7 +168,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/round_btn_opciones"
-                android:onClick="guardarDisponibilidad"
                 android:text="AGREGAR" />
 
             <TextView

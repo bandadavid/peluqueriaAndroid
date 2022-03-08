@@ -14,7 +14,7 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/gradiant_animation"
         android:orientation="vertical"
         android:padding="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,9 +41,10 @@
         <EditText
             android:id="@+id/txtUsuario"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese su usuario"
+            android:hint="   Ingrese su usuario"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#000000" />
@@ -56,9 +57,10 @@
         <EditText
             android:id="@+id/txtPassword"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="41dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese su password"
+            android:hint="   Ingrese su password"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#000000" />
@@ -71,11 +73,12 @@
         <EditText
             android:id="@+id/txtEstado"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text="ACTIVO"
+            android:text="   ACTIVO"
             android:textColor="#000000" />
 
         <TextView
@@ -86,11 +89,12 @@
         <EditText
             android:id="@+id/txtPerfil"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text="ADMINISTRADOR"
+            android:text="   ADMINISTRADOR"
             android:textColor="#000000" />
 
         <TextView
@@ -101,9 +105,10 @@
         <EditText
             android:id="@+id/txtApellido"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese su apellido"
+            android:hint="   Ingrese su apellido"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#000000" />
@@ -116,9 +121,10 @@
         <EditText
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese su nombre"
+            android:hint="   Ingrese su nombre"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#000000" />
@@ -138,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFC107"
+                android:background="@drawable/round_btn_opciones"
                 android:text="AGREGAR" />
 
             <TextView
@@ -151,7 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFC107"
+                android:background="@drawable/round_btn_opciones"
                 android:onClick="botonCancelar"
                 android:text="CANCELAR" />
         </LinearLayout>

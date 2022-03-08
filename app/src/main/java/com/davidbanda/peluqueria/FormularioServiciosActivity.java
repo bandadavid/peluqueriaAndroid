@@ -18,8 +18,13 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Min;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 import java.io.IOException;
+import java.util.List;
 
 import ServiciosWeb.Servicios;
 import ServiciosWeb.Servidor;
@@ -29,7 +34,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FormularioServiciosActivity extends AppCompatActivity {
+public class FormularioServiciosActivity extends AppCompatActivity implements Validator.ValidationListener {
 
     int IMG_REQUEST = 21;
 
@@ -37,10 +42,13 @@ public class FormularioServiciosActivity extends AppCompatActivity {
     Servicios peticionesWeb;
     Servidor miServidor;
 
+    Validator validator;
+
+    @NotEmpty (message = "Debes llenar el campo")
     EditText txtNombre, txtDescripcion, txtPrecio;
 
     ImageView imgServicio;
-    Button btnFoto;
+    Button btnFoto, btnAgregar;
 
     Bitmap bitmap;
 
@@ -59,7 +67,12 @@ public class FormularioServiciosActivity extends AppCompatActivity {
         txtDescripcion = (EditText) findViewById(R.id.txtDescripcion);
         txtPrecio = (EditText) findViewById(R.id.txtPrecio);
 
+        validator = new Validator(this);
+        validator.setValidationListener(this);
+
         btnFoto = (Button) findViewById(R.id.btnFoto);
+        btnAgregar = (Button) findViewById(R.id.btnAgregar);
+
         imgServicio = (ImageView) findViewById(R.id.imgServicio);
 
         btnFoto.setOnClickListener(new View.OnClickListener(){
@@ -69,6 +82,13 @@ public class FormularioServiciosActivity extends AppCompatActivity {
                 intent.setType("image/*");
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(intent, IMG_REQUEST);
+            }
+        });
+
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validator.validate();
             }
         });
     }
@@ -88,8 +108,20 @@ public class FormularioServiciosActivity extends AppCompatActivity {
         }
     }
 
+    public void botonCancelar(View vista){
+        Intent ventanaServicios = new Intent(getApplicationContext(), ServiciosActivity.class);
+        startActivity(ventanaServicios);
+        finish();
+    }
 
-    public void guardarServicio(View view){
+    public void abrirServicios(){
+        Intent ventanaServicios = new Intent(getApplicationContext(), ServiciosActivity.class);
+        startActivity(ventanaServicios);
+        finish();
+    }
+
+    @Override
+    public void onValidationSucceeded() {
         String nombreIngresado = txtNombre.getText().toString();
         String descripcionIngresada = txtDescripcion.getText().toString();
         String precioIngresado = txtPrecio.getText().toString();
@@ -140,18 +172,18 @@ public class FormularioServiciosActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
 
-
-
-    public void botonCancelar(View vista){
-        Intent ventanaServicios = new Intent(getApplicationContext(), ServiciosActivity.class);
-        startActivity(ventanaServicios);
-        finish();
-    }
-
-    public void abrirServicios(){
-        Intent ventanaServicios = new Intent(getApplicationContext(), ServiciosActivity.class);
-        startActivity(ventanaServicios);
-        finish();
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

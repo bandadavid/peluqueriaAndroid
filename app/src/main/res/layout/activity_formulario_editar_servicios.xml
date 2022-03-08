@@ -4,13 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/gradiant_animation"
     tools:context=".FormularioEditarServiciosActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
         android:orientation="vertical"
         android:padding="25sp">
 
@@ -43,9 +42,10 @@
         <EditText
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingresar nombre"
+            android:hint="   Ingresar nombre"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#6C6C6C" />
@@ -58,9 +58,10 @@
         <EditText
             android:id="@+id/txtDescripcion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingresar descripción"
+            android:hint="   Ingresar descripción"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#6C6C6C" />
@@ -73,9 +74,10 @@
         <EditText
             android:id="@+id/txtPrecio"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese el precio"
+            android:hint="   Ingrese el precio"
             android:inputType="numberDecimal"
             android:textColor="#000000"
             android:textColorHint="#6C6C6C" />
@@ -95,8 +97,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFC107"
-                android:onClick="editarServicios"
+                android:background="@drawable/round_btn_opciones"
                 android:text="ACTUALIZAR" />
 
             <TextView
@@ -109,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFC107"
+                android:background="@drawable/round_btn_opciones"
                 android:onClick="botonCancelar"
                 android:text="CANCELAR" />
         </LinearLayout>
@@ -128,7 +129,7 @@
                 android:id="@+id/txtEliminar4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#BD0303"
+                android:background="@drawable/round_btn_danger"
                 android:gravity="center"
                 android:onClick="eliminarServicio"
                 android:text="ELIMINAR" />

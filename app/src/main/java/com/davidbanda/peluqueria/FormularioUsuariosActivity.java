@@ -40,7 +40,7 @@ public class FormularioUsuariosActivity extends AppCompatActivity implements Val
     Servicios peticionesWeb;
     Servidor miServidor;
 
-    @NotEmpty (message = "Debe ingresar un texto")
+    @NotEmpty (message = "Debes llenar el campo")
     @Min(value = 3, message = "Ingrese minimo 3 caracteres")
     EditText txtUsuario, txtPassword, txtEstado, txtPerfil, txtApellido, txtNombre;
 

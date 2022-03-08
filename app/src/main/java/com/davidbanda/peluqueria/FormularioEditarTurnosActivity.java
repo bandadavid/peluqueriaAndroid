@@ -23,12 +23,16 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import ServiciosWeb.Servicios;
 import ServiciosWeb.Servidor;
@@ -38,17 +42,22 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FormularioEditarTurnosActivity extends AppCompatActivity {
+public class FormularioEditarTurnosActivity extends AppCompatActivity implements Validator.ValidationListener {
 
     Retrofit objetoRetrofit;
     Servicios peticionesWeb;
     Servidor miServidor;
 
+    @NotEmpty(message = "Debes llenar el campo")
     EditText txtApellido, txtNombre, txtCelular, txtCodigo;
+
+    Validator validator;
 
     Spinner spnEstados, spServicios;
 
     ArrayList<String> listaServicios = new ArrayList<>();
+
+    Button btnAgregar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +73,8 @@ public class FormularioEditarTurnosActivity extends AppCompatActivity {
 
         spnEstados = (Spinner) findViewById(R.id.spnEstados);
 
+        btnAgregar = (Button) findViewById(R.id.btnAgregar);
+
         String[] estados = {"ACTIVO", "INACTIVO"};
 
         spnEstados.setAdapter(new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, estados));
@@ -73,10 +84,14 @@ public class FormularioEditarTurnosActivity extends AppCompatActivity {
         String nombre = getIntent().getStringExtra("nombre");
         String celular = getIntent().getStringExtra("celular");
 
+
         txtCodigo.setText(codigo);
         txtApellido.setText(apellido);
         txtNombre.setText(nombre);
         txtCelular.setText(celular);
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
         miServidor=new Servidor();
         objetoRetrofit=new Retrofit.Builder()
@@ -84,6 +99,13 @@ public class FormularioEditarTurnosActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create()).build();
         peticionesWeb=objetoRetrofit.create(Servicios.class);
         llenarSpinnerServicios();
+
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validator.validate();
+            }
+        });
     }
 
     public void llenarSpinnerServicios(){
@@ -132,58 +154,6 @@ public class FormularioEditarTurnosActivity extends AppCompatActivity {
         });
     }
 
-    public void editarTurnos(View view){
-        String codigoIngresado = txtCodigo.getText().toString();
-        String apellidoIngresado = txtApellido.getText().toString();
-        String nombreIngresado = txtNombre.getText().toString();
-        String celularIngresado = txtCelular.getText().toString();
-        String estadoIngresado = spnEstados.getSelectedItem().toString();
-        String servicioIngresado = spServicios.getSelectedItem().toString();
-
-        Call llamadaHTTP=peticionesWeb.editarReserva(apellidoIngresado, nombreIngresado, celularIngresado, estadoIngresado, servicioIngresado, codigoIngresado);
-        final ProgressDialog progressDialog;
-        progressDialog = new ProgressDialog(FormularioEditarTurnosActivity.this);
-        progressDialog.setMax(100);
-        progressDialog.setMessage("Editando datos...");
-        progressDialog.setTitle("Procesando Turno");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
-        llamadaHTTP.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
-                try {
-                    if(response.isSuccessful()){
-                        String resultadoJson = new Gson().toJson(response.body());
-                        JsonObject objetoJson = new JsonParser().parse(resultadoJson).getAsJsonObject();
-                        if(objetoJson.get("estado").getAsString().equalsIgnoreCase("ok")){
-                            abrirTurnos();
-                            Toast.makeText(getApplicationContext(), "Turno editado correctamente", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "No se ingreso el turno",
-                                    Toast.LENGTH_LONG).show();
-                            progressDialog.dismiss();
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Error al traer los DATOS",
-                                Toast.LENGTH_LONG).show();
-                        progressDialog.dismiss();
-                    }
-                } catch (Exception ex){
-                    Toast.makeText(getApplicationContext(), "Error en la App Web -> " +ex.toString(),
-                            Toast.LENGTH_LONG).show();
-                    progressDialog.dismiss();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "ERROR DE CONEXION (IP)",
-                        Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
-            }
-        });
-    }
 
     public void eliminarTurno(View view){
         String codigoIngresado = txtCodigo.getText().toString();
@@ -245,4 +215,72 @@ public class FormularioEditarTurnosActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public void onValidationSucceeded() {
+        String codigoIngresado = txtCodigo.getText().toString();
+        String apellidoIngresado = txtApellido.getText().toString();
+        String nombreIngresado = txtNombre.getText().toString();
+        String celularIngresado = txtCelular.getText().toString();
+        String estadoIngresado = spnEstados.getSelectedItem().toString();
+        String servicioIngresado = spServicios.getSelectedItem().toString();
+
+        Call llamadaHTTP=peticionesWeb.editarReserva(apellidoIngresado, nombreIngresado, celularIngresado, estadoIngresado, servicioIngresado, codigoIngresado);
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(FormularioEditarTurnosActivity.this);
+        progressDialog.setMax(100);
+        progressDialog.setMessage("Editando datos...");
+        progressDialog.setTitle("Procesando Turno");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        llamadaHTTP.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                try {
+                    if(response.isSuccessful()){
+                        String resultadoJson = new Gson().toJson(response.body());
+                        JsonObject objetoJson = new JsonParser().parse(resultadoJson).getAsJsonObject();
+                        if(objetoJson.get("estado").getAsString().equalsIgnoreCase("ok")){
+                            abrirTurnos();
+                            Toast.makeText(getApplicationContext(), "Turno editado correctamente", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No se ingreso el turno",
+                                    Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error al traer los DATOS",
+                                Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                    }
+                } catch (Exception ex){
+                    Toast.makeText(getApplicationContext(), "Error en la App Web -> " +ex.toString(),
+                            Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "ERROR DE CONEXION (IP)",
+                        Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        });
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
+    }
 }

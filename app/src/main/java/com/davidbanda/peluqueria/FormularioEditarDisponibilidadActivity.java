@@ -19,11 +19,15 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import ServiciosWeb.Servicios;
 import ServiciosWeb.Servidor;
@@ -33,15 +37,18 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FormularioEditarDisponibilidadActivity extends AppCompatActivity {
+public class FormularioEditarDisponibilidadActivity extends AppCompatActivity implements Validator.ValidationListener {
 
     Retrofit objetoRetrofit;
     Servicios peticionesWeb;
     Servidor miServidor;
 
+    @NotEmpty(message = "Debes llenar el campo")
     EditText txtFecha, txtHoraI, txtHoraF, txtCod;
 
-    Button btnFechaHoraInicio, btnHoraInicio, btnHoraFin;
+    Validator validator;
+
+    Button btnFechaHoraInicio, btnHoraInicio, btnHoraFin, btnAgregar;
 
     private int dia,mes,ano,hora,minutos;
 
@@ -64,6 +71,10 @@ public class FormularioEditarDisponibilidadActivity extends AppCompatActivity {
         btnFechaHoraInicio = (Button) findViewById(R.id.btnFechaHoraInicio);
         btnHoraInicio = (Button) findViewById(R.id.btnHoraInicio);
         btnHoraFin = (Button) findViewById(R.id.btnHoraFin);
+        btnAgregar = (Button) findViewById(R.id.btnAgregar);
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
         String codigo = getIntent().getStringExtra("codigo");
         String fecha = getIntent().getStringExtra("fecha");
@@ -74,6 +85,13 @@ public class FormularioEditarDisponibilidadActivity extends AppCompatActivity {
         txtFecha.setText(fecha);
         txtHoraI.setText(horaInicio);
         txtHoraF.setText(horaFin);
+
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validator.validate();
+            }
+        });
     }
 
     public void mostrarDatePickeFecha(View view){
@@ -89,7 +107,7 @@ public class FormularioEditarDisponibilidadActivity extends AppCompatActivity {
                     if(month+1 < 10 && dayOfMonth < 10){
                         txtFecha.setText(year+"-"+"0"+(month+1)+"-"+"0"+dayOfMonth);
                     } else {
-                        txtFecha.setText(year+(month+1)+dayOfMonth);
+                        txtFecha.setText(year+"-"+(month+1)+"-"+dayOfMonth);
                     }
                 }
             }, dia, mes, ano);
@@ -170,57 +188,6 @@ public class FormularioEditarDisponibilidadActivity extends AppCompatActivity {
         }
     }
 
-    public void editarDisponibilidad(View view){
-        String codigoIngresado = txtCod.getText().toString();
-        String fechaIngresada = txtFecha.getText().toString();
-        String horaIIngresada = txtHoraI.getText().toString();
-        String horaFFin = txtHoraF.getText().toString();
-
-        Call llamadaHTTP=peticionesWeb.editarDisponibilidad(fechaIngresada, horaIIngresada, horaFFin, codigoIngresado);
-        final ProgressDialog progressDialog;
-        progressDialog = new ProgressDialog(FormularioEditarDisponibilidadActivity.this);
-        progressDialog.setMax(100);
-        progressDialog.setMessage("Editando datos...");
-        progressDialog.setTitle("Procesando Disponibilidad");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
-        llamadaHTTP.enqueue(new Callback() {
-            @Override
-            public void onResponse(Call call, Response response) {
-                try {
-                    if(response.isSuccessful()){
-                        String resultadoJson = new Gson().toJson(response.body());
-                        JsonObject objetoJson = new JsonParser().parse(resultadoJson).getAsJsonObject();
-                        if(objetoJson.get("estado").getAsString().equalsIgnoreCase("ok")){
-                            abrirDisponibilidades();
-                            Toast.makeText(getApplicationContext(), "Disponibilidad editada correctamente", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "No se ingreso la disponibilidad",
-                                    Toast.LENGTH_LONG).show();
-                            progressDialog.dismiss();
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Error al traer los DATOS",
-                                Toast.LENGTH_LONG).show();
-                        progressDialog.dismiss();
-                    }
-                } catch (Exception ex){
-                    Toast.makeText(getApplicationContext(), "Error en la App Web -> " +ex.toString(),
-                            Toast.LENGTH_LONG).show();
-                    progressDialog.dismiss();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "ERROR DE CONEXION (IP)",
-                        Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
-            }
-        });
-    }
-
     public void eliminarDisponibilidad(View view){
         String codigoIngresado = txtCod.getText().toString();
 
@@ -281,5 +248,72 @@ public class FormularioEditarDisponibilidadActivity extends AppCompatActivity {
         Intent ventanaDisponibilidad = new Intent(getApplicationContext(), DisponibilidadActivity.class);
         startActivity(ventanaDisponibilidad);
 
+    }
+
+    @Override
+    public void onValidationSucceeded() {
+        String codigoIngresado = txtCod.getText().toString();
+        String fechaIngresada = txtFecha.getText().toString();
+        String horaIIngresada = txtHoraI.getText().toString();
+        String horaFFin = txtHoraF.getText().toString();
+
+        Call llamadaHTTP=peticionesWeb.editarDisponibilidad(fechaIngresada, horaIIngresada, horaFFin, codigoIngresado);
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(FormularioEditarDisponibilidadActivity.this);
+        progressDialog.setMax(100);
+        progressDialog.setMessage("Editando datos...");
+        progressDialog.setTitle("Procesando Disponibilidad");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        llamadaHTTP.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                try {
+                    if(response.isSuccessful()){
+                        String resultadoJson = new Gson().toJson(response.body());
+                        JsonObject objetoJson = new JsonParser().parse(resultadoJson).getAsJsonObject();
+                        if(objetoJson.get("estado").getAsString().equalsIgnoreCase("ok")){
+                            abrirDisponibilidades();
+                            Toast.makeText(getApplicationContext(), "Disponibilidad editada correctamente", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No se ingreso la disponibilidad",
+                                    Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error al traer los DATOS",
+                                Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                    }
+                } catch (Exception ex){
+                    Toast.makeText(getApplicationContext(), "Error en la App Web -> " +ex.toString(),
+                            Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "ERROR DE CONEXION (IP)",
+                        Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        });
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

@@ -32,21 +32,23 @@
         <TextView
             android:id="@+id/textView13"
             android:layout_width="match_parent"
-            android:layout_height="116dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="36sp"
             android:textStyle="bold" />
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:srcCompat="@tools:sample/avatars" />
+            android:layout_width="287dp"
+            android:layout_height="227dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/fondo"
+            android:background="@drawable/round_btn"/>
 
         <TextView
             android:id="@+id/textView14"
             android:layout_width="match_parent"
-            android:layout_height="68dp"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="36sp"
             android:textStyle="bold" />
@@ -82,7 +84,7 @@
         <TextView
             android:id="@+id/textView16"
             android:layout_width="match_parent"
-            android:layout_height="95dp"
+            android:layout_height="63dp"
             android:gravity="center"
             android:textSize="36sp"
             android:textStyle="bold" />

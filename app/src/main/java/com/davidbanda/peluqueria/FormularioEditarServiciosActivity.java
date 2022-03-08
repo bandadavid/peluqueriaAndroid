@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -13,6 +14,11 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
+
+import java.util.List;
 
 import ServiciosWeb.Servicios;
 import ServiciosWeb.Servidor;
@@ -22,8 +28,11 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class FormularioEditarServiciosActivity extends AppCompatActivity {
+public class FormularioEditarServiciosActivity extends AppCompatActivity implements Validator.ValidationListener {
 
+    Validator validator;
+
+    @NotEmpty(message = "Debes llenar el campo")
     EditText txtCodigo, txtNombre, txtDescripcion, txtPrecio;
 
     ImageView imgServicio;
@@ -31,6 +40,10 @@ public class FormularioEditarServiciosActivity extends AppCompatActivity {
     Retrofit objetoRetrofit;
     Servicios peticionesWeb;
     Servidor miServidor;
+
+    Button btnAgregar;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +55,8 @@ public class FormularioEditarServiciosActivity extends AppCompatActivity {
         txtDescripcion = (EditText) findViewById(R.id.txtDescripcion);
         txtPrecio = (EditText) findViewById(R.id.txtPrecio);
 
+        btnAgregar = (Button) findViewById(R.id.btnAgregar);
+
         imgServicio = (ImageView) findViewById(R.id.imgServicio);
 
         miServidor=new Servidor();
@@ -49,6 +64,9 @@ public class FormularioEditarServiciosActivity extends AppCompatActivity {
                 .baseUrl(miServidor.obtenerurlBase())
                 .addConverterFactory(GsonConverterFactory.create()).build();
         peticionesWeb=objetoRetrofit.create(Servicios.class);
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
 
         String codigo = getIntent().getStringExtra("codigo");
         String nombre = getIntent().getStringExtra("nombre");
@@ -59,56 +77,11 @@ public class FormularioEditarServiciosActivity extends AppCompatActivity {
         txtNombre.setText(nombre);
         txtDescripcion.setText(descripcion);
         txtPrecio.setText(precio);
-    }
 
-
-    public void editarServicios(View view){
-        String codigoIngresado = txtCodigo.getText().toString();
-        String nombreIngresado = txtNombre.getText().toString();
-        String descripcionIngresada = txtDescripcion.getText().toString();
-        String precioIngresado = txtPrecio.getText().toString();
-
-        Call llamadaHTTP=peticionesWeb.editarServicios(nombreIngresado, descripcionIngresada, precioIngresado, codigoIngresado);
-        final ProgressDialog progressDialog;
-        progressDialog = new ProgressDialog(FormularioEditarServiciosActivity.this);
-        progressDialog.setMax(100);
-        progressDialog.setMessage("Editando datos...");
-        progressDialog.setTitle("Procesando Servicio");
-        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDialog.show();
-        llamadaHTTP.enqueue(new Callback() {
+        btnAgregar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onResponse(Call call, Response response) {
-                try {
-                    if(response.isSuccessful()){
-                        String resultadoJson = new Gson().toJson(response.body());
-                        JsonObject objetoJson = new JsonParser().parse(resultadoJson).getAsJsonObject();
-                        if(objetoJson.get("estado").getAsString().equalsIgnoreCase("ok")){
-                            abrirServicios();
-                            Toast.makeText(getApplicationContext(), "Servicio editado correctamente", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(getApplicationContext(), "No se edito el servicio",
-                                    Toast.LENGTH_LONG).show();
-                            progressDialog.dismiss();
-                        }
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Error al traer los DATOS",
-                                Toast.LENGTH_LONG).show();
-                        progressDialog.dismiss();
-                    }
-                } catch (Exception ex){
-                    Toast.makeText(getApplicationContext(), "Error en la App Web -> " +ex.toString(),
-                            Toast.LENGTH_LONG).show();
-                    progressDialog.dismiss();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call call, Throwable t) {
-                Toast.makeText(getApplicationContext(), "ERROR DE CONEXION (IP)",
-                        Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
+            public void onClick(View v) {
+                validator.validate();
             }
         });
     }
@@ -171,5 +144,72 @@ public class FormularioEditarServiciosActivity extends AppCompatActivity {
         Intent ventanaServicios = new Intent(getApplicationContext(), ServiciosActivity.class);
         startActivity(ventanaServicios);
         finish();
+    }
+
+    @Override
+    public void onValidationSucceeded() {
+        String codigoIngresado = txtCodigo.getText().toString();
+        String nombreIngresado = txtNombre.getText().toString();
+        String descripcionIngresada = txtDescripcion.getText().toString();
+        String precioIngresado = txtPrecio.getText().toString();
+
+        Call llamadaHTTP=peticionesWeb.editarServicios(nombreIngresado, descripcionIngresada, precioIngresado, codigoIngresado);
+        final ProgressDialog progressDialog;
+        progressDialog = new ProgressDialog(FormularioEditarServiciosActivity.this);
+        progressDialog.setMax(100);
+        progressDialog.setMessage("Editando datos...");
+        progressDialog.setTitle("Procesando Servicio");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+        llamadaHTTP.enqueue(new Callback() {
+            @Override
+            public void onResponse(Call call, Response response) {
+                try {
+                    if(response.isSuccessful()){
+                        String resultadoJson = new Gson().toJson(response.body());
+                        JsonObject objetoJson = new JsonParser().parse(resultadoJson).getAsJsonObject();
+                        if(objetoJson.get("estado").getAsString().equalsIgnoreCase("ok")){
+                            abrirServicios();
+                            Toast.makeText(getApplicationContext(), "Servicio editado correctamente", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "No se edito el servicio",
+                                    Toast.LENGTH_LONG).show();
+                            progressDialog.dismiss();
+                        }
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Error al traer los DATOS",
+                                Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                    }
+                } catch (Exception ex){
+                    Toast.makeText(getApplicationContext(), "Error en la App Web -> " +ex.toString(),
+                            Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call call, Throwable t) {
+                Toast.makeText(getApplicationContext(), "ERROR DE CONEXION (IP)",
+                        Toast.LENGTH_LONG).show();
+                progressDialog.dismiss();
+            }
+        });
+    }
+
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
