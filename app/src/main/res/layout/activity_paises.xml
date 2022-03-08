@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:onClick="abrirFormularioIngreso"
-    tools:context=".UsuariosActivity"
+    tools:context=".PaisesActivity"
     android:background="@drawable/gradiant_animation">
 
     <LinearLayout
@@ -33,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="USUARIOS"
+            android:text="PAISES"
             android:textColor="#B701C3"
             android:textSize="22sp"
             android:textStyle="bold" />
@@ -48,9 +47,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_btn"
-            android:textColor="#000"
-            android:onClick="abrirFormularioIngreso"
-            android:text="AGREGAR" />
+            android:onClick="abrirFormularioPaises"
+            android:text="AGREGAR"
+            android:textColor="#000" />
 
         <TextView
             android:id="@+id/textView11"
@@ -62,8 +61,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/round_btn"
-            android:onClick="consultarUsuarios"
-
+            android:onClick="consultarPaises"
             android:text="ACTUALIZAR"
             android:textColor="#000" />
 
@@ -73,10 +71,11 @@
             android:layout_height="wrap_content" />
 
         <ListView
-            android:id="@+id/lstUsuarios"
+            android:id="@+id/lstPaises"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/round_btn"
             />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

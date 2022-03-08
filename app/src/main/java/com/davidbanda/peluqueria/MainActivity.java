@@ -56,4 +56,9 @@ public class MainActivity extends AppCompatActivity {
         Intent ventanaServicios = new Intent(getApplicationContext(), ServiciosActivity.class);
         startActivity(ventanaServicios);
     }
+
+    public void abrirPaises(View view){
+        Intent ventanaPaises = new Intent(getApplicationContext(), PaisesActivity.class);
+        startActivity(ventanaPaises);
+    }
 }

@@ -23,6 +23,9 @@ public interface Servicios {
     @GET("index.php/servicios/listarServicios")
     Call<Object> consultarServi();
 
+    @GET("index.php/paises/listarPaises")
+    Call<Object> consultarPaises();
+
     @FormUrlEncoded
     @POST("index.php/usuarios/guardarUsuarios")
     Call<Object> guardarUsuarios(
@@ -59,6 +62,13 @@ public interface Servicios {
             @Field("descripcion_ser") String descripcion,
             @Field("precio_ser") String precio,
             @Field("foto_ser") String foto
+    );
+
+    @FormUrlEncoded
+    @POST("index.php/paises/guardarPaises")
+    Call<Object> guardarPais(
+            @Field("nombre_bd") String nombre,
+            @Field("continente_bd") String continente
     );
 
     @FormUrlEncoded

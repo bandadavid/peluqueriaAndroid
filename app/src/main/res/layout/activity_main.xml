@@ -103,5 +103,20 @@
             android:textColor="#000000"
             android:background="@drawable/round_btn"/>
 
+        <TextView
+            android:id="@+id/textView40"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="match_parent"
+            android:layout_height="68dp"
+            android:background="@drawable/round_btn"
+            android:backgroundTint="#FFFFFF"
+            android:onClick="abrirPaises"
+            android:text="Paises"
+            android:textColor="#000000" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
