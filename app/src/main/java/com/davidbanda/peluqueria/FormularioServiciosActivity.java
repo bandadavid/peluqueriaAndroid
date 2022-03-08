@@ -44,7 +44,7 @@ public class FormularioServiciosActivity extends AppCompatActivity implements Va
 
     Validator validator;
 
-    @NotEmpty (message = "Debes llenar el campo")
+    @NotEmpty(message = "Campo necesario")
     EditText txtNombre, txtDescripcion, txtPrecio;
 
     ImageView imgServicio;

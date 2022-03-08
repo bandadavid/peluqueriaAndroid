@@ -46,10 +46,10 @@ public class FormularioDisponibilidadActivity extends AppCompatActivity implemen
 
     Validator validator;
 
-    @NotEmpty (message = "Debes llenar el campo")
+    @NotEmpty(message = "Campo necesario")
     EditText txtHoraFin;
 
-    @NotEmpty (message = "Debes llenar el campo")
+    @NotEmpty(message = "Campo necesario")
     EditText txtFechaInicio, txtHoraInicio;
 
     Button btnFecha, btnHoraInicio, btnHoraFin, btnAgregar;

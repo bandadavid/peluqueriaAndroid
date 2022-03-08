@@ -60,10 +60,10 @@ public class FormularioTurnosActivity extends AppCompatActivity implements Valid
     private int dia,mes,ano,hora,minutos;
 
 
-    @NotEmpty (message = "Debes llenar el campo")
+    @NotEmpty(message = "Campo necesario")
     EditText txtApellido, txtNombre, txtCelular, txtEstado;
 
-    @NotEmpty (message = "Debes llenar el campo")
+    @NotEmpty(message = "Campo necesario")
     EditText txtFechaInicio, txtHoraInicio;
 
 

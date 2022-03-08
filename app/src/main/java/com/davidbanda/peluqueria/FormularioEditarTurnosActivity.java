@@ -48,7 +48,7 @@ public class FormularioEditarTurnosActivity extends AppCompatActivity implements
     Servicios peticionesWeb;
     Servidor miServidor;
 
-    @NotEmpty(message = "Debes llenar el campo")
+    @NotEmpty(message = "Campo necesario")
     EditText txtApellido, txtNombre, txtCelular, txtCodigo;
 
     Validator validator;

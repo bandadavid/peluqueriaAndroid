@@ -93,8 +93,7 @@
             android:id="@+id/btnIngresar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FF9800"
-            android:onClick="consultarLogin"
+            android:background="@drawable/round_btn_opciones"
             android:text="INGRESAR"
             android:textColor="#FFFFFF"
             app:rippleColor="#FFC107" />

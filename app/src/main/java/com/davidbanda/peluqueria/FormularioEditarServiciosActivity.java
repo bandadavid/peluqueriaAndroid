@@ -32,7 +32,7 @@ public class FormularioEditarServiciosActivity extends AppCompatActivity impleme
 
     Validator validator;
 
-    @NotEmpty(message = "Debes llenar el campo")
+    @NotEmpty(message = "Campo necesario")
     EditText txtCodigo, txtNombre, txtDescripcion, txtPrecio;
 
     ImageView imgServicio;

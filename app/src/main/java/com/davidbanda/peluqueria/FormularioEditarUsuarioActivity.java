@@ -38,7 +38,7 @@ public class FormularioEditarUsuarioActivity extends AppCompatActivity implement
 
     Validator validator;
 
-    @NotEmpty(message = "Debes llenar el campo")
+    @NotEmpty(message = "Campo necesario")
     EditText txtUsuario, txtApellido, txtNombre, txtCodigo;
 
     Spinner spnEstados;

@@ -43,7 +43,7 @@ public class FormularioEditarDisponibilidadActivity extends AppCompatActivity im
     Servicios peticionesWeb;
     Servidor miServidor;
 
-    @NotEmpty(message = "Debes llenar el campo")
+    @NotEmpty(message = "Campo necesario")
     EditText txtFecha, txtHoraI, txtHoraF, txtCod;
 
     Validator validator;

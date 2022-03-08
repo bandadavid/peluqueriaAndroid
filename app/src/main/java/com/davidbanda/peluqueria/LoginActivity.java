@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -16,8 +17,12 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mobsandgeeks.saripaar.ValidationError;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.NotEmpty;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import ServiciosWeb.Servicios;
 import ServiciosWeb.Servidor;
@@ -27,12 +32,18 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements Validator.ValidationListener {
+
+    Validator validator;
 
     Retrofit objetoRetrofit;
     Servicios peticionesWeb;
     Servidor miServidor;
+
+    @NotEmpty(message = "Campo necesario")
     EditText txtUsuario, txtPassword;
+
+    Button btnIngresar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +59,11 @@ public class LoginActivity extends AppCompatActivity {
         txtUsuario = (EditText) findViewById(R.id.txtUsuario);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
 
+        btnIngresar = (Button) findViewById(R.id.btnIngresar);
+
+        validator = new Validator(this);
+        validator.setValidationListener(this);
+
         //Definiendo el objeto shared preferences
         SharedPreferences usuariosIngresados=getSharedPreferences("datos", MODE_PRIVATE);
         //Verificando si alguien esta conectado
@@ -59,10 +75,24 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             //En el caso que nadie este conectado
         }
+
+        btnIngresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validator.validate();
+            }
+        });
     }
 
+    public void abrirMenu(){
+        finish();// Cerrando ventana actual
+        //Objeto para manipular la actividad Menu
+        Intent ventanaMenu = new Intent(getApplicationContext(), MainActivity.class);
+        startActivity(ventanaMenu); //Solicitando que se abra el Menu
+    }
 
-    public void consultarLogin(View view){
+    @Override
+    public void onValidationSucceeded() {
         String usuarioIngresado = txtUsuario.getText().toString();
         String passwordIngresado = txtPassword.getText().toString();
         Call llamadaHTTP=peticionesWeb.consultarUsuarios();
@@ -82,7 +112,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (usuarioIngresado.equals(usuario.replace("\"","")) || passwordIngresado.equals(password.replace("\"",""))){
                                     Toast.makeText(getApplicationContext(), "Usuario encontrado abriendo app",
-                                        Toast.LENGTH_LONG).show();
+                                            Toast.LENGTH_LONG).show();
                                     SharedPreferences usuariosIngresados = getSharedPreferences("datos", MODE_PRIVATE);
                                     SharedPreferences.Editor editor1 = usuariosIngresados.edit(); //editor para escribir valores
                                     editor1.putString("usuario", String.valueOf(usuariosIngresados)); //guardando el valor del email
@@ -117,10 +147,18 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void abrirMenu(){
-        finish();// Cerrando ventana actual
-        //Objeto para manipular la actividad Menu
-        Intent ventanaMenu = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(ventanaMenu); //Solicitando que se abra el Menu
+    @Override
+    public void onValidationFailed(List<ValidationError> errors) {
+        for (ValidationError error : errors) {
+            View view = error.getView();
+            String message = error.getCollatedErrorMessage(this);
+
+            // Display error messages ;)
+            if (view instanceof EditText) {
+                ((EditText) view).setError(message);
+            } else {
+                Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
