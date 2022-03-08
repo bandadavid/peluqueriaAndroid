@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormularioEditarDisponibilidadActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical"
+        android:padding="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="OPCIONES DE DISPONIBILIDAD"
+            android:textColor="#B701C3"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:textColorHint="#000000" />
+
+        <EditText
+            android:id="@+id/txtCod"
+            android:layout_width="match_parent"
+            android:layout_height="17dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textColor="#000000"
+            android:textColorHint="#8A8A8A"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnFechaHoraInicio"
+                android:layout_width="151dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#F44336"
+                android:onClick="mostrarDatePickeFecha"
+                android:text="Fecha" />
+
+            <TextView
+                android:id="@+id/textView27"
+                android:layout_width="-10sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#000000" />
+
+            <EditText
+                android:id="@+id/txtFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="dd/mm/yyyy"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textColorHint="#9E9E9E" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView19"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnHoraInicio"
+                android:layout_width="151dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#F44336"
+                android:onClick="mostrarDatePickeFecha"
+                android:text="Hora Inicio" />
+
+            <TextView
+                android:id="@+id/textView270"
+                android:layout_width="-10sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#000000" />
+
+            <EditText
+                android:id="@+id/txtHoraI"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="hh:mm"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textColorHint="#9E9E9E" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnHoraFin"
+                android:layout_width="151dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#F44336"
+                android:onClick="mostrarDatePickeFecha"
+                android:text="Hora Fin" />
+
+            <TextView
+                android:id="@+id/textView2700"
+                android:layout_width="-10sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#000000" />
+
+            <EditText
+                android:id="@+id/txtHoraF"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:enabled="false"
+                android:hint="hh:mm"
+                android:inputType="textPersonName"
+                android:textColor="#000000"
+                android:textColorHint="#9E9E9E" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView24"
+            android:layout_width="match_parent"
+            android:layout_height="73dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnAgregar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FFC107"
+                android:onClick="editarDisponibilidad"
+                android:text="ACTUALIZAR" />
+
+            <TextView
+                android:layout_width="1sp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/btnCancelar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="#FFC107"
+                android:onClick="botonCancelar"
+                android:text="CANCELAR" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/txtEliminar2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#BD0303"
+                android:gravity="center"
+                android:onClick="eliminarDisponibilidad"
+                android:text="ELIMINAR" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
