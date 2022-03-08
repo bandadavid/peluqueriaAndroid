@@ -4,30 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FormularioUsuariosActivity">
+    android:background="#FFFFFF"
+    tools:context=".FormularioEditarServiciosActivity">
 
     <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="1dp"
-        android:layout_marginBottom="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#FFFFFF"
         android:orientation="vertical"
-        android:padding="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="25sp">
 
         <TextView
             android:id="@+id/textView17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="AGREGAR USUARIO"
+            android:text="OPCIONES DEL SERVICIO"
             android:textColor="#B701C3"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -35,18 +27,43 @@
         <TextView
             android:id="@+id/textView18"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
+            android:layout_height="38dp"
             android:textColorHint="#000000" />
 
         <EditText
-            android:id="@+id/txtUsuario"
+            android:id="@+id/txtCodigo"
+            android:layout_width="match_parent"
+            android:layout_height="17dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:textColor="#000000"
+            android:textColorHint="#8A8A8A"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/txtNombre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Ingrese su usuario"
+            android:hint="Ingresar nombre"
             android:inputType="textPersonName"
             android:textColor="#000000"
-            android:textColorHint="#000000" />
+            android:textColorHint="#6C6C6C" />
+
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/txtDescripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Ingresar descripción"
+            android:inputType="textPersonName"
+            android:textColor="#000000"
+            android:textColorHint="#6C6C6C" />
 
         <TextView
             android:id="@+id/textView19"
@@ -54,77 +71,17 @@
             android:layout_height="wrap_content" />
 
         <EditText
-            android:id="@+id/txtPassword"
+            android:id="@+id/txtPrecio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Ingrese su password"
-            android:inputType="textPersonName"
+            android:hint="Ingrese el precio"
+            android:inputType="numberDecimal"
             android:textColor="#000000"
-            android:textColorHint="#000000" />
+            android:textColorHint="#6C6C6C" />
 
         <TextView
-            android:id="@+id/textView20"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/txtEstado"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="ACTIVO"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/textView21"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/txtPerfil"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:enabled="false"
-            android:inputType="textPersonName"
-            android:text="ADMINISTRADOR"
-            android:textColor="#000000" />
-
-        <TextView
-            android:id="@+id/textView22"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/txtApellido"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ingrese su apellido"
-            android:inputType="textPersonName"
-            android:textColor="#000000"
-            android:textColorHint="#000000" />
-
-        <TextView
-            android:id="@+id/textView23"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <EditText
-            android:id="@+id/txtNombre"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="Ingrese su nombre"
-            android:inputType="textPersonName"
-            android:textColor="#000000"
-            android:textColorHint="#000000" />
-
-        <TextView
-            android:id="@+id/textView24"
+            android:id="@+id/textView28"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -139,7 +96,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#FFC107"
-                android:text="AGREGAR" />
+                android:onClick="editarServicios"
+                android:text="ACTUALIZAR" />
 
             <TextView
                 android:layout_width="1sp"
@@ -156,5 +114,25 @@
                 android:text="CANCELAR" />
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView39"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/txtEliminar4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#BD0303"
+                android:gravity="center"
+                android:onClick="eliminarServicio"
+                android:text="ELIMINAR" />
+        </LinearLayout>
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

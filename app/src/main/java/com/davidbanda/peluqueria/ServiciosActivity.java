@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -32,7 +33,7 @@ public class ServiciosActivity extends AppCompatActivity {
     Retrofit objetoRetrofit;
     Servicios peticionesWeb;
     Servidor miServidor;
-
+    String[] listaSplit;
     ListView lstServicios;
     ArrayList<String> listaServicios = new ArrayList<>();
 
@@ -47,6 +48,33 @@ public class ServiciosActivity extends AppCompatActivity {
                 .baseUrl(miServidor.obtenerurlBase())
                 .addConverterFactory(GsonConverterFactory.create()).build();
         peticionesWeb=objetoRetrofit.create(Servicios.class);
+
+        seleccionServiciosClick();
+    }
+
+    public void seleccionServiciosClick(){
+
+        lstServicios.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Toast.makeText(getApplicationContext(), "Seleccionaste el elemento: " + listaUsuarios.get(position), Toast.LENGTH_SHORT).show();
+                //finish();// Cerrando ventana actual
+                //Objeto para manipular la actividad Menu
+                finish();
+                Intent ventanaEditarServicios = new Intent(getApplicationContext(), FormularioEditarServiciosActivity.class);
+                listaSplit = listaServicios.get(position).split("\\|");
+                ventanaEditarServicios.putExtra("codigo", listaSplit[0]);
+                ventanaEditarServicios.putExtra("nombre", listaSplit[1]);
+                ventanaEditarServicios.putExtra("descripcion", listaSplit[2]);
+                ventanaEditarServicios.putExtra("precio", listaSplit[3]);
+                startActivity(ventanaEditarServicios);
+                //Toast.makeText(getApplicationContext(), "Seleccionaste el elemento: " + listaSplit[0].replace(" ", ""), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
     }
 
     public void consultarServ(View view){
@@ -63,13 +91,14 @@ public class ServiciosActivity extends AppCompatActivity {
                             JsonArray listadoObtenido = objetoJson.getAsJsonArray("datos");
 
                             for(JsonElement servicioTemporal:listadoObtenido){
+                                String codigo = servicioTemporal.getAsJsonObject().get("codigo_ser").toString();
                                 String nombre = servicioTemporal.getAsJsonObject().get("nombre_ser").toString();
                                 String descripcion = servicioTemporal.getAsJsonObject().get("descripcion_ser").toString();
                                 String precio = servicioTemporal.getAsJsonObject().get("precio_ser").toString();
-                                String foto = servicioTemporal.getAsJsonObject().get("foto_ser").toString();
+                                //String foto = servicioTemporal.getAsJsonObject().get("foto_ser").toString();
 
 
-                                listaServicios.add(nombre.replace("\"","") + " | " + descripcion.replace("\"","") + " | " + precio.replace("\"","") + " | " + foto.replace("\"","") + " | ");
+                                listaServicios.add(codigo.replace("\"","") + "|" +nombre.replace("\"","") + "|" + descripcion.replace("\"","") + "|" + precio.replace("\"",""));
 
 
                             }

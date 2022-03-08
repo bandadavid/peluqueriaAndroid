@@ -4,7 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/gradiant_animation">
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.gridlayout.widget.GridLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -14,7 +21,6 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
-        android:background="#FFFFFF"
         android:orientation="vertical"
         android:padding="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,8 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="STYLO'S PELUQUERIA"
-            android:textColor="#B701C3"
+            android:text="STYLO'S PELUQUERÍA"
+            android:textColor="#6200EA"
             android:textSize="22sp"
             android:textStyle="bold" />
 
@@ -46,10 +52,11 @@
             android:id="@+id/button"
             android:layout_width="match_parent"
             android:layout_height="61dp"
-            android:backgroundTint="#FFC107"
+            android:backgroundTint="#FFFFFF"
             android:onClick="abrirUsuarios"
             android:text="Usuarios"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:background="@drawable/round_btn"/>
 
         <TextView
             android:id="@+id/textView8"
@@ -60,7 +67,8 @@
             android:id="@+id/button2"
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:backgroundTint="#FFC107"
+            android:background="@drawable/round_btn"
+            android:backgroundTint="#FFFFFF"
             android:onClick="abrirDisponibilidad"
             android:text="Disponibilidad"
             android:textColor="#000000" />
@@ -74,10 +82,11 @@
             android:id="@+id/button4"
             android:layout_width="match_parent"
             android:layout_height="67dp"
-            android:backgroundTint="#FFC107"
+            android:backgroundTint="#FFFFFF"
             android:onClick="abrirTurnos"
             android:text="Turnos"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:background="@drawable/round_btn"/>
 
         <TextView
             android:id="@+id/textView10"
@@ -88,9 +97,11 @@
             android:id="@+id/button5"
             android:layout_width="match_parent"
             android:layout_height="68dp"
-            android:backgroundTint="#FFC107"
+            android:backgroundTint="#FFFFFF"
             android:onClick="abrirServicios"
             android:text="Servicios"
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:background="@drawable/round_btn"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

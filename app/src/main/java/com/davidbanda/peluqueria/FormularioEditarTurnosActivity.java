@@ -122,7 +122,6 @@ public class FormularioEditarTurnosActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Error en la App Web -> " +ex.toString(),
                             Toast.LENGTH_LONG).show();
                 }
-
             }
 
             @Override

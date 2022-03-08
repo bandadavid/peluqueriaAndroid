@@ -16,7 +16,7 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/gradiant_animation"
         android:orientation="vertical"
         android:padding="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -64,9 +64,10 @@
             <EditText
                 android:id="@+id/txtFechaInicio"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/round_btn"
                 android:ems="10"
-                android:hint="dd/mm/yyyy"
+                android:hint="   dd/mm/yyyy"
                 android:inputType="textPersonName"
                 android:textColor="#000000"
                 android:textColorHint="#9E9E9E" />
@@ -101,10 +102,11 @@
             <EditText
                 android:id="@+id/txtHoraInicio"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="34dp"
+                android:background="@drawable/round_btn"
                 android:ems="10"
                 android:enabled="false"
-                android:hint="hh:mm"
+                android:hint="   hh:mm"
                 android:inputType="textPersonName"
                 android:textColor="#000000"
                 android:textColorHint="#9E9E9E" />
@@ -141,10 +143,11 @@
             <EditText
                 android:id="@+id/txtHoraFin"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/round_btn"
                 android:ems="10"
                 android:enabled="false"
-                android:hint="hh:mm"
+                android:hint="   hh:mm"
                 android:inputType="textPersonName"
                 android:textColor="#000000"
                 android:textColorHint="#9E9E9E" />
@@ -154,7 +157,7 @@
         <TextView
             android:id="@+id/textView24"
             android:layout_width="match_parent"
-            android:layout_height="73dp" />
+            android:layout_height="45dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -166,7 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFC107"
+                android:background="@drawable/round_btn_opciones"
                 android:onClick="guardarDisponibilidad"
                 android:text="AGREGAR" />
 
@@ -180,7 +183,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFC107"
+                android:background="@drawable/round_btn_opciones"
                 android:onClick="botonCancelar"
                 android:text="CANCELAR" />
         </LinearLayout>

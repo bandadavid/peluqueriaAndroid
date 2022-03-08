@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@drawable/gradiant_animation"
     tools:context=".LoginActivity">
 
 
@@ -12,7 +12,6 @@
         android:id="@+id/linearLayout4"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#673AB7"
         android:orientation="vertical"
         android:padding="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,7 +25,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="STYLO´S"
-            android:textColor="#FFFFFF"
+            android:textColor="#000"
             android:textSize="36sp"
             android:textStyle="bold" />
 

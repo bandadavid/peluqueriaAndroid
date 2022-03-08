@@ -14,7 +14,7 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/gradiant_animation"
         android:orientation="vertical"
         android:padding="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,9 +63,10 @@
             <EditText
                 android:id="@+id/txtFechaInicio"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:background="@drawable/round_btn"
                 android:ems="10"
-                android:hint="dd/mm/yyyy"
+                android:hint="   dd/mm/yyyy"
                 android:inputType="textPersonName"
                 android:textColor="#000000"
                 android:textColorHint="#9E9E9E" />
@@ -101,10 +102,11 @@
             <EditText
                 android:id="@+id/txtHoraInicio"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="37dp"
+                android:background="@drawable/round_btn"
                 android:ems="10"
                 android:enabled="false"
-                android:hint="hh:mm"
+                android:hint="   hh:mm"
                 android:inputType="textPersonName"
                 android:textColor="#000000"
                 android:textColorHint="#9E9E9E" />
@@ -120,9 +122,10 @@
         <EditText
             android:id="@+id/txtApellido"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese el apellido"
+            android:hint="   Ingrese el apellido"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#9E9E9E" />
@@ -135,9 +138,10 @@
         <EditText
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese el nombre"
+            android:hint="   Ingrese el nombre"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#9E9E9E" />
@@ -150,9 +154,10 @@
         <EditText
             android:id="@+id/txtCelular"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese el celular"
+            android:hint="   Ingrese el celular"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#9E9E9E" />
@@ -166,11 +171,12 @@
         <EditText
             android:id="@+id/txtEstado"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
             android:enabled="false"
             android:inputType="textPersonName"
-            android:text="ACTIVO"
+            android:text="   ACTIVO"
             android:textColor="#000000" />
 
         <TextView
@@ -191,8 +197,8 @@
             android:id="@+id/spServicios"
             style="@style/Widget.AppCompat.Spinner.DropDown"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="#CDCDCD"
+            android:layout_height="38dp"
+            android:background="@drawable/round_btn"
             android:spinnerMode="dropdown" />
 
         <TextView
@@ -211,7 +217,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FF9800"
+                android:background="@drawable/round_btn_opciones"
                 android:onClick="guardarTurno"
                 android:text="AGREGAR" />
 
@@ -225,7 +231,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FF9800"
+                android:background="@drawable/round_btn_opciones"
                 android:onClick="botonCancelar"
                 android:text="CANCELAR" />
 

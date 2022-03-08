@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="abrirFormularioIngreso"
-    tools:context=".UsuariosActivity">
+    tools:context=".UsuariosActivity"
+    android:background="@drawable/gradiant_animation">
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -15,7 +16,6 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
-        android:background="#FFFFFF"
         android:orientation="vertical"
         android:padding="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +47,8 @@
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFC107"
+            android:background="@drawable/round_btn"
+            android:textColor="#000"
             android:onClick="abrirFormularioIngreso"
             android:text="AGREGAR" />
 
@@ -60,7 +61,8 @@
             android:id="@+id/button6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFC107"
+            android:background="@drawable/round_btn"
+            android:textColor="#000"
             android:onClick="consultarUsuarios"
             android:text="ACTUALIZAR" />
 
@@ -73,6 +75,7 @@
             android:id="@+id/lstUsuarios"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#D8D8D8" />
+            android:background="@drawable/round_btn"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

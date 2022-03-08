@@ -14,7 +14,7 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
-        android:background="#FFFFFF"
+        android:background="@drawable/gradiant_animation"
         android:orientation="vertical"
         android:padding="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -53,9 +53,10 @@
         <EditText
             android:id="@+id/txtApellido"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="42dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese el apellido"
+            android:hint="   Ingrese el apellido"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#9E9E9E" />
@@ -68,9 +69,10 @@
         <EditText
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese el nombre"
+            android:hint="   Ingrese el nombre"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#9E9E9E" />
@@ -83,9 +85,10 @@
         <EditText
             android:id="@+id/txtCelular"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese el celular"
+            android:hint="   Ingrese el celular"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#9E9E9E" />
@@ -99,12 +102,13 @@
         <Spinner
             android:id="@+id/spnEstados"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_btn"/>
 
         <TextView
             android:id="@+id/textView21"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="35dp" />
 
         <TextView
             android:id="@+id/textView201"
@@ -119,8 +123,8 @@
             android:id="@+id/spServicios"
             style="@style/Widget.AppCompat.Spinner.DropDown"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="#CDCDCD"
+            android:layout_height="41dp"
+            android:background="@drawable/round_btn"
             android:spinnerMode="dropdown" />
 
         <TextView
@@ -139,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FF9800"
+                android:background="@drawable/round_btn_opciones"
                 android:onClick="editarTurnos"
                 android:text="ACTUALIZAR" />
 
@@ -153,7 +157,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FF9800"
+                android:background="@drawable/round_btn_opciones"
                 android:onClick="botonCancelar"
                 android:text="CANCELAR" />
 
@@ -173,7 +177,7 @@
                 android:id="@+id/txtEliminar3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#BD0303"
+                android:background="@drawable/round_btn_danger"
                 android:gravity="center"
                 android:onClick="eliminarTurno"
                 android:text="ELIMINAR" />

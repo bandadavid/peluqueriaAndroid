@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FormularioEditarUsuarioActivity">
+    tools:context=".FormularioEditarUsuarioActivity"
+    android:background="@drawable/gradiant_animation">
 
     <LinearLayout
         android:id="@+id/linearLayout5"
@@ -14,7 +15,6 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
-        android:background="#FFFFFF"
         android:orientation="vertical"
         android:padding="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -41,7 +41,7 @@
         <EditText
             android:id="@+id/txtCodigo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="18dp"
             android:ems="10"
             android:inputType="textPersonName"
             android:textColor="#000000"
@@ -64,9 +64,10 @@
         <EditText
             android:id="@+id/txtUsuario"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese su usuario"
+            android:hint="    Ingrese su usuario"
             android:inputType="textPersonName"
             android:textColor="#000000"
             android:textColorHint="#8A8A8A" />
@@ -88,12 +89,14 @@
             android:id="@+id/spnEstados"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:spinnerMode="dropdown" />
+            android:spinnerMode="dropdown"
+            android:background="@drawable/round_btn"
+            android:textColor="#000"/>
 
         <TextView
             android:id="@+id/textView21"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="47dp" />
 
         <TextView
             android:id="@+id/textView33"
@@ -106,11 +109,12 @@
         <EditText
             android:id="@+id/txtApellido"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese su apellido"
+            android:hint="    Ingrese su apellido"
             android:inputType="textPersonName"
-            android:textColor="#000000"
+            android:textColor="#000"
             android:textColorHint="#8A8A8A" />
 
         <TextView
@@ -129,11 +133,12 @@
         <EditText
             android:id="@+id/txtNombre"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/round_btn"
             android:ems="10"
-            android:hint="Ingrese su nombre"
+            android:hint="    Ingrese su nombre"
             android:inputType="textPersonName"
-            android:textColor="#000000"
+            android:textColor="#000"
             android:textColorHint="#8A8A8A" />
 
         <TextView
@@ -151,9 +156,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFC107"
+                android:background="@drawable/round_btn_opciones"
                 android:onClick="editarUsuarios"
-                android:text="ACTUALIZAR" />
+                android:text="ACTUALIZAR"
+                />
 
             <TextView
                 android:layout_width="1sp"
@@ -165,7 +171,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#FFC107"
+                android:background="@drawable/round_btn_opciones"
                 android:onClick="botonCancelar"
                 android:text="CANCELAR" />
         </LinearLayout>
@@ -184,7 +190,7 @@
                 android:id="@+id/txtEliminar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#BD0303"
+                android:background="@drawable/round_btn_danger"
                 android:gravity="center"
                 android:onClick="eliminarUsuarios"
                 android:text="ELIMINAR" />

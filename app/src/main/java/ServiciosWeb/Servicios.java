@@ -105,4 +105,18 @@ public interface Servicios {
     Call<Object> eliminarReserva(
             @Path("codigo_res") String codigo
     );
+
+    @FormUrlEncoded
+    @POST("index.php/servicios/editarServicios/{codigo_ser}")
+    Call<Object> editarServicios(
+            @Field("nombre_ser") String nombre,
+            @Field("descripcion_ser") String descripcion,
+            @Field("precio_ser") String precio,
+            @Path("codigo_ser") String codigo
+    );
+
+    @GET("index.php/servicios/eliminarServicios/{codigo_ser}")
+    Call<Object> eliminarServicio(
+            @Path("codigo_ser") String codigo
+    );
 }

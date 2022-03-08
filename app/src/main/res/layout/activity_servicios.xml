@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ServiciosActivity">
+    tools:context=".ServiciosActivity"
+    android:background="@drawable/gradiant_animation">
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -14,7 +15,6 @@
         android:layout_marginTop="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="1dp"
-        android:background="#FFFFFF"
         android:orientation="vertical"
         android:padding="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,7 +46,8 @@
             android:id="@+id/button33"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFC107"
+            android:background="@drawable/round_btn"
+            android:textColor="#000"
             android:onClick="abrirFormularioIngreso"
             android:text="AGREGAR" />
 
@@ -59,7 +60,8 @@
             android:id="@+id/button3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#FFC107"
+            android:background="@drawable/round_btn"
+            android:textColor="#000"
             android:onClick="consultarServ"
             android:text="ACTUALIZAR" />
 
@@ -72,7 +74,8 @@
             android:id="@+id/lstServicios"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#D8D8D8" />
+            android:background="@drawable/round_btn"
+            android:textColor="#000"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
